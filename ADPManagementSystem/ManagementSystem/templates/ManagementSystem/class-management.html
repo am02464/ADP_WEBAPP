@@ -1,0 +1,85 @@
+{% extends 'ManagementSystem/header.html'%}
+{% block javascript %}
+  <script>
+
+    /**
+    $(document).on('submit','#delete',function(e){
+            e.preventDefault();
+			var proceed = confirm("On delete all enrollments to this class will also be deleted, Do you really want to delete?");
+
+			if (proceed){
+				$.ajax({
+					type: 'post',
+					url: "{% url 'delete_class' %}",
+					data: {
+						csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+						{% for class in classes%}
+							{{class.id}}:document.getElementById("{{class.id}}").checked,
+						{% endfor%}
+						},
+					success: function (data) {
+						$("#class-table").html(data)
+
+					}
+				});
+            }
+       });
+    **/
+
+       $('#save').on('click',function(e){
+            e.preventDefault();
+
+			$.ajax({
+					type: 'post',
+					url: "{% url 'delete_class' %}",
+					data: {
+						csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+						{% for class in classes%}
+							{{class.id}}:document.getElementById("{{class.id}}").checked,
+						{% endfor%}
+						},
+					success: function (data) {
+						$("#class-table").html(data)
+
+					}
+			});
+       });
+  </script>
+{% endblock %}
+
+{% block content%}
+	<hr class="my-4" style="background-color: white">
+    <a class='btn btn-success text-white' href="{%url 'add_class' %}">Add Class</a>
+    {% csrf_token%}
+    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Delete</button>
+	<hr class="my-4" style="background-color: white">
+	{% include  'ManagementSystem/class-table.html'%}
+
+
+
+    <!--latest edit-->
+    <!-- Delete Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Class</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            On delete all enrollments to this class will also be deleted, Do you really want to delete?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,129 @@
+
+.centered{
+  overflow: auto;
+
+
+
+ }
+
+ .jumbo{
+ 	background-color: black;
+ }
+
+.chapter-name{
+
+    font-size: 4rem;
+    font-weight:bold;
+
+}
+
+.menu{
+    background:#004c98;
+
+
+}
+.uc-text{
+ color:#f1f8ff;
+}
+
+.menu.a.{
+
+    font-style: None;
+
+
+}
+
+
+
+.menu:hover{
+    background-color: green;
+
+
+}
+
+
+.customnav{
+	background-color:#0062cc;
+
+}
+
+.menu-title{
+    font-size: 2rem;
+    font-weight:bold;
+}
+
+
+
+
+
+
+
+@media (min-width: 576px) {
+
+menu-title{
+    font-size: 3rem;
+    font-weight: normal;
+
+}
+
+.chapter-name{
+
+    font-size: 5rem;
+    font-weight:normal;
+
+}
+
+}
+
+
+
+@media (min-width: 768px) {
+
+
+
+
+menu-title{
+    font-size: 3rem;
+    font-weight: normal;
+
+}
+}
+
+@media (min-width: 992px) { 
+
+
+
+menu-title{
+    font-size: 4rem;
+    font-weight: normal;
+
+}
+
+}
+
+
+
+
+@media screen and (min-width: 1200px) {
+ .centered{
+    padding-left: 10%;
+    padding-right: 10%;
+
+ }
+
+
+ .userinfo{
+ 	width: 100%;
+ }
+
+
+
+.menu-title{
+    font-size: 4rem;
+    font-weight: normal;
+ 
+}
+
+
+}
+
