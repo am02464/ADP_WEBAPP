@@ -1,0 +1,191 @@
+
+
+.centered{
+    overflow: auto;
+  
+  
+  
+   }
+
+   #main-carousel{
+       height: 100%;
+       
+   }
+
+   .featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
+  
+  /* Thin out the marketing headings */
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+  }
+  #chapter-div{
+    padding-top:5%;
+    padding-bottom:5%;
+    text-align: center;
+  }
+
+   #section-1{
+          background: #00000000;
+   }
+  
+  
+   #section-2{
+       background: darkgray;
+       
+   }
+  
+  
+  
+   #main-section{
+      background: #004c98;
+       height: 100%;
+      padding-top: 3 rem;   
+   }
+  
+   .jumbo{
+       background-color: #00000000;
+       background-repeat: no-repeat;
+      
+   }
+  
+  .chapter-name{
+  
+      font-size: 4rem;
+      font-weight:bold;
+      padding-top: 4rem;
+  
+  }
+  
+  .menu{
+      background:#004c98;
+  
+  
+  }
+  .uc-text{
+      text-align: center;
+   color:#f1f8ff;
+  }
+  
+  .menu.a{
+  
+      font-style: None;
+  
+  
+  }
+  
+  
+  
+  .menu:hover{
+      background-color: green;
+  
+  
+  }
+  
+  
+  .customnav{
+      
+      width: 100%;
+      position: fixed;
+      
+    
+  
+  }
+  
+  .menu-title{
+      font-size: 2rem;
+      font-weight:bold;
+  }
+  
+  
+  
+  
+  
+  
+  
+  @media (min-width: 576px) {
+    
+    
+
+  
+  menu-title{
+      font-size: 3rem;
+      font-weight: normal;
+  
+  }
+  
+  .chapter-name{
+  
+      font-size: 5rem;
+      font-weight:normal;
+  
+  }
+  
+  }
+  
+  
+  
+  @media (min-width: 768px) {
+    
+   .section{
+    height: 100%;
+      
+      
+    }   
+    #main-carousel{
+        height:50%;
+    }
+    
+
+  
+  
+  
+  menu-title{
+      font-size: 3rem;
+      font-weight: normal;
+  
+  }
+  }
+  
+  @media screen and (min-width: 992px) { 
+  
+  
+  
+  menu-title{
+      font-size: 4rem;
+      font-weight: normal;
+  
+  }
+  
+  }
+  
+  
+  
+  
+  @media screen and (min-width: 1200px) {
+   .centered{
+      padding-left: 10%;
+      padding-right: 10%;
+  
+   }
+  
+  
+   .userinfo{
+       width: 100%;
+   }
+  
+  
+  
+  .menu-title{
+      font-size: 4rem;
+      font-weight: normal;
+   
+  }
+  
+  
+  }
+  
+  

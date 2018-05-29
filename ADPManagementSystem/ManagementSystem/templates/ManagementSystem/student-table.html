@@ -1,4 +1,6 @@
-<table id="student-table" class="table table-hover table-responsive-sm table-dark">
+<div class="table-responsive">
+		<table id="class-table" class="table-hover table table-striped text-black">
+		
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
@@ -17,15 +19,15 @@
 	      {% for item in students%}
 			{% if forloop.counter == 2%}
 				{% if item != None%}
-					<td ><a class='text-white' href="#"> {{item}} </a></td>
+					<td ><a  href="#"> {{item}} </a></td>
 				{% else %}
 					<td> {{item}} </td>
 				{% endif %}
 			{% else %}
-	      		<td ><a class='text-white'   href="{% url 'update_student' item.id %}"> {{item.id}} </a></td>
-	      		<td ><a class='text-white' href="{% url 'update_student' item.id %}"> {{item.getFullName}} </a></td>
-	      		<td ><a class='text-white' href="{% url 'update_student' item.id %}"> {{item.fathername}} </a></td>
-	      		<td ><a class='text-white' href="{% url 'update_student' item.id %}"> {{item.batch}} </a></td>
+	      		<td ><a   href="{% url 'update_student' item.id %}"> {{item.id}} </a></td>
+	      		<td ><a href="{% url 'update_student' item.id %}"> {{item.getFullName}} </a></td>
+	      		<td ><a href="{% url 'update_student' item.id %}"> {{item.fathername}} </a></td>
+	      		<td ><a href="{% url 'update_student' item.id %}"> {{item.batch}} </a></td>
 				<td><input type="checkbox" class="check" id="{{item.id}}" value="present" name="{{item.id}}"></td>
 			{% endif %}
 	      {% endfor%}
@@ -33,3 +35,4 @@
 	    {% endfor%}
 	  </tbody>
 </table>
+</div>

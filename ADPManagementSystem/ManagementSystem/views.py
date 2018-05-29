@@ -32,7 +32,15 @@ def main(request):
 
 
 
+def index(request):
+    form = Login()
+    chapter = UC_Chapter.objects.all()
 
+
+    print(chapter)
+    
+    ContexDictionary ={'UC_Name': chapter[0].name, 'UC_Details':chapter[0].discription,'Login_Form':form}
+    return render(request,'ManagementSystem/index.html', ContexDictionary)
 
 
 @login_required(login_url="/management")
