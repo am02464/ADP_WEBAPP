@@ -1,0 +1,162 @@
+
+.centered{
+  overflow: auto;
+  padding: 1rem;
+
+
+ }
+ .section{
+    height: 100%;
+    
+ }
+
+ #section-1{
+        
+ }
+
+
+ #section-2{
+     background: darkgray
+ }
+
+
+
+ #main-section{
+    background: white;
+     height: 100%;
+    padding-top: 3 rem;   
+ }
+
+ .jumbo{
+     background-color: #00000000;
+     background-repeat: no-repeat;
+    
+ }
+
+.chapter-name{
+
+    font-size: 4rem;
+    font-weight:bold;
+    padding-top: 4rem;
+
+}
+
+.menu{
+    background:#004c98;
+
+
+}
+.uc-text{
+    text-align: left;
+ color:black;
+}
+
+.menu.a{
+
+    font-style: None;
+
+
+}
+
+
+
+.menu:hover{
+    background-color: green;
+
+
+}
+
+
+.customnav{
+    
+    width: 100%;
+    position: fixed;
+    
+  
+
+}
+
+.menu-title{
+    font-size: 2rem;
+    font-weight:bold;
+}
+
+
+
+
+
+
+
+@media (min-width: 576px) {
+
+menu-title{
+    font-size: 3rem;
+    font-weight: normal;
+
+}
+
+.chapter-name{
+
+    font-size: 5rem;
+    font-weight:normal;
+
+}
+
+}
+
+
+
+@media (min-width: 768px) {
+    .uc-text{
+        text-align: center;
+ 
+    }
+
+
+
+
+menu-title{
+    font-size: 3rem;
+    font-weight: normal;
+
+}
+}
+
+@media screen and (min-width: 992px) { 
+
+
+
+menu-title{
+    font-size: 4rem;
+    font-weight: normal;
+
+}
+
+}
+
+
+
+
+@media screen and (min-width: 1200px) {
+ .centered{
+    padding-left: 10%;
+    padding-right: 10%;
+
+ }
+
+
+ .userinfo{
+ 	width: 100%;
+ }
+
+
+
+.menu-title{
+    font-size: 4rem;
+    font-weight: normal;
+ 
+}
+
+
+}
+

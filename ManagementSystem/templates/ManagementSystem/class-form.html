@@ -1,0 +1,34 @@
+<form id="generic-class" method="post" >
+        <div class="card col-sm-6" style="background-color:rgba(0, 0, 0, 0)">
+            {% csrf_token %}
+            <h5 id="message" class="text-success">{{message}}</h5>
+
+                <div class="form-group">
+
+                    <label class="text-white">Class Name</label>
+                    <div style="color:red">{{form.name.errors}}</div>
+                    {{form.name}}
+
+                </div>
+                <div class="form-group">
+                    <div style="color:red">{{form.section.errors}}</div>
+                    <label class="text-white">Section</label>
+                    {{form.section}}
+                    <a class="text-primary" href="#">Add Section</a>
+                </div>
+                <div class="form-group form-inline">
+                    <label class="text-white" >Begin Date</label>
+                    <div style="color:red" class="container	">{{form.begindate.errors}}</div>
+                    {{form.begindate}}
+                </div>
+            <div class="form-group form-inline">
+                <label class="text-white">End Date </label>
+                <div style="color:red" class="container	">{{form.enddate.errors}}</div>
+                    {{form.enddate}}
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+
+        </div>
+
+
+</form>

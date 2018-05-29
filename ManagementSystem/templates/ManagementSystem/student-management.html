@@ -1,0 +1,60 @@
+{% extends 'ManagementSystem/header.html'%}
+
+{% block javascript%}
+    <script>
+            $('#delete').click(function(event){
+                var children = $('.check');
+				console.log(children);
+				var count = 0;
+				var name = " ";
+				var dict = Array();
+				while (count < children.length){
+					name += children[count].id;
+
+					dict[name] = children[count].checked;
+
+					count++;
+					name =' ';
+
+					}
+				console.log(dict[' 2']);
+
+				/*alert("Hello");
+                var dict = {csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
+                            {% for student in students%}
+								{% for item in student%}
+									{% if forloop.first %}
+									   {{item.id}} : document.getElementById("{{item.id}}").checked,
+									{% endif %}
+								{% endfor %}
+                            {% endfor %}
+                            }
+
+                $.post("{% url 'delete_student' %}",dict,function(data){
+                    console.log(data);
+                    $('student-table').html(data)
+
+
+
+                });
+				*/
+            });
+    </script>
+{% endblock %}
+
+{% block content%}
+	<hr class="my-4" style="background-color: white">
+	<a class='btn btn-success text-white' href="{%url 'add_student' %}">Add Student</a>
+	<button id='delete' class='btn btn-success text-white'>Delete</button>
+	<hr class="my-4" style="background-color: white">
+    <form method="post" class="form-inline">
+        {% csrf_token%}
+		<span >
+			Filters
+        	{{filter.class_selector}}
+			{{filter.batch_selector}}
+		</span>
+    </form>
+	{% include 'ManagementSystem/student-table.html'%}
+
+{% endblock %}

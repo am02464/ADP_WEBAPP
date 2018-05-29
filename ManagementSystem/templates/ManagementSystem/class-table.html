@@ -1,0 +1,29 @@
+<div class="table-responsive">
+<table id="class-table" class="table-hover table table-striped text-black">
+
+	  <thead>
+	    <tr>
+
+	      <th scope="col">ID</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Section</th>
+	      <th scope="col">Begin Date</th>
+	      <th scope="col">End Date</th>
+	      <th scope="col">Delete</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	  	{% for class in classes%}
+	    <tr>
+			<td scope="row"><a  href="{% url 'view_class' class.id %}">{{class.id}}</a></td>
+			<td scope="row"><a  href="{% url 'view_class' class.id %}">{{class.name}}</a></td>
+			<td scope="row"><a  href="{% url 'view_class' class.id %}">{{class.section}}</a></td>
+			<td scope="row"><a  href="{% url 'view_class' class.id %}">{{class.begindate}}</a></td>
+			<td scope="row"><a  href="{% url 'view_class' class.id %}">{{class.enddate}}</a></td>
+			<td><input type="checkbox" class='check' id="{{class.id}}" value="present" name="{{class.id}}"></td>
+		</tr>
+		{% endfor%}
+	  </tbody>
+	</table>
+	</div>
