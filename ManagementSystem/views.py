@@ -33,7 +33,7 @@ def main(request):
 
 
 def index(request):
-    ContexDictionary ={'UC_Name': 'HABIB UNIVERSITY CHAPTER' 'UC_Details':'This is, what it is','Login_Form':form}
+    ContexDictionary ={'UC_Name': 'HABIB UNIVERSITY CHAPTER' 'UC_Details':'This is, what it is'}
     return render(request,'ManagementSystem/index.html', ContexDictionary)
 
 
