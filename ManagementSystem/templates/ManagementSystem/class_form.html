@@ -1,0 +1,14 @@
+
+<form method="post" action="{% url 'classCreate'%}" >
+    <h5 id="message" class="text-success">{{message}}</h5>
+    {% for i in form %}
+    <div class="form-group field-group">
+        <label>{{i.label}}</label>
+        {{i.errors}}
+
+        <small id="emailHelp" class="form-text text-muted">{{i.help_text}}</small>
+        {{i}}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Submit" />
+</form>

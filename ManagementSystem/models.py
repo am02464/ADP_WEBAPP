@@ -24,6 +24,9 @@ class Section(models.Model):
         return str(self.id)
 
 class Class(models.Model):
+    class Meta:
+        permissions = (('view_class', 'Can view class'),)
+
     name = models.CharField(max_length=30,verbose_name='Class Name', help_text='add class name here')
     section = models.ForeignKey(Section,on_delete=models.SET_NULL,null=True,blank=True)#.IntegerField(verbose_name='Section',help_text='add section name here')
     begindate = models.DateField(null=False,blank=False,verbose_name= 'Begin Date',help_text='add begin date here')
@@ -44,21 +47,21 @@ class Students(models.Model):
     firstname = models.CharField(max_length=30,verbose_name='First Name', help_text='add first name here',null=False,blank=False)
     lastname = models.CharField(max_length=30,verbose_name='Last Name', help_text='add last name here',null=False,blank=False)
     fathername = models.CharField(max_length=30,verbose_name='Father\'s Name', help_text='add last name here',null=False,blank=False)
-    fatherscnic = models.BigIntegerField(max_length=13,verbose_name='Guardian\'s CNIC Number',help_text='Guardian\'s CNIC Number here',blank=False,null=False)
-    studentscnic = models.BigIntegerField(max_length=13,verbose_name='Guardian\'s CNIC Number',help_text='Guardian\'s CNIC Number here',blank=False,null=False)
-    fathersnumber = models.BigIntegerField(max_length=11,verbose_name='Guardian\'s CNIC Number',help_text='Guardian\'s CNIC Number here',blank=False,null=False)
-    studentsnumber = models.BigIntegerField(max_length=11,verbose_name='Guardian\'s CNIC Number',help_text='Guardian\'s CNIC Number here',blank=False,null=False)
+    fatherscnic = models.BigIntegerField(verbose_name='Guardian\'s CNIC Number',help_text='Guardian\'s CNIC Number here',blank=False,null=False)
+    studentscnic = models.BigIntegerField(verbose_name='Student\'s CNIC Number',help_text='Student\'s CNIC Number here',blank=False,null=False)
+    fathersnumber = models.BigIntegerField(verbose_name='Guardian\'s Contact Number',help_text='Guardian\'s contact Number here',blank=False,null=False)
+    studentsnumber = models.BigIntegerField(verbose_name='Student\'s Contact Number',help_text='Students\'s contact Number here',blank=False,null=False)
     batch = models.ForeignKey(Batch,on_delete=models.SET_NULL,null=True)
     def getFullName(self):
         return str(self.firstname +' '+ self.lastname)
 
     def __str__(self):
-        return self.getFullName()
+        return str(self.id)
 
 
 class Enrollment(models.Model):
-    student = models.ForeignKey(Students,on_delete=models.CASCADE,primary_key=True)
-    clas = models.ForeignKey(Class,on_delete=models.CASCADE,null=False)
+    student = models.ForeignKey(Students,on_delete=models.CASCADE, verbose_name='Student ID')
+    clas = models.ForeignKey(Class,on_delete=models.CASCADE,null=False, verbose_name='Class ID')
 
     def __str__(self):
         return str(self.student_id)

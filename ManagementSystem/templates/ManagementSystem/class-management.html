@@ -1,85 +1,337 @@
-{% extends 'ManagementSystem/header.html'%}
-{% block javascript %}
-  <script>
+{% extends 'ManagementSystem/dash-base.html' %}
+{% block mainContent %}
 
-    /**
-    $(document).on('submit','#delete',function(e){
-            e.preventDefault();
-			var proceed = confirm("On delete all enrollments to this class will also be deleted, Do you really want to delete?");
+<ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Class Management</li>
+</ol>
 
-			if (proceed){
-				$.ajax({
-					type: 'post',
-					url: "{% url 'delete_class' %}",
-					data: {
-						csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
-						{% for class in classes%}
-							{{class.id}}:document.getElementById("{{class.id}}").checked,
-						{% endfor%}
-						},
-					success: function (data) {
-						$("#class-table").html(data)
+<hr class="my-4" style="background-color: white">
+{% if 'Add' in permissions %}
+<button type="button" id='add-class-btn' class="btn btn-success" data-toggle="modal" data-target="#add-class-modal">Add Class</button>
 
-					}
-				});
-            }
-       });
-    **/
-
-       $('#save').on('click',function(e){
-            e.preventDefault();
-
-			$.ajax({
-					type: 'post',
-					url: "{% url 'delete_class' %}",
-					data: {
-						csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val(),
-						{% for class in classes%}
-							{{class.id}}:document.getElementById("{{class.id}}").checked,
-						{% endfor%}
-						},
-					success: function (data) {
-						$("#class-table").html(data)
-
-					}
-			});
-       });
-  </script>
-{% endblock %}
-
-{% block content%}
-	<hr class="my-4" style="background-color: white">
-    <a class='btn btn-success text-white' href="{%url 'add_class' %}">Add Class</a>
-    {% csrf_token%}
-    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Delete</button>
-	<hr class="my-4" style="background-color: white">
-	{% include  'ManagementSystem/class-table.html'%}
-
-
-
-    <!--latest edit-->
-    <!-- Delete Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete Class</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            On delete all enrollments to this class will also be deleted, Do you really want to delete?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">Save changes</button>
-          </div>
-        </div>
-      </div>
+{% endif %}
+{% csrf_token%}
+{% if 'Delete' in permissions %}
+<button type="submit" class="btn btn-danger  float-right" data-toggle="modal" data-target="#exampleModal" >Delete Selected</button>
+<hr class="my-4" style="background-color: white">
+{% endif %}
+<div class="row mb-3">
+    <div class="col-sm-2 col-lg-2 pr-0">
+        {{classFilter.searchBox}}
     </div>
+    <div class="col-sm-2 col-lg-2 pr-0">
+        {{classFilter.numberOfEntries}}
+        
+    </div>
+    <div class="col-sm-3 col-lg-3">
+            <a class="fa fa-2x fa-search text-primary" id="refresh"></a>
+    </div>
+</div>
+<hr class="my-4" style="background-color: white">
 
-
+<!--class table-->
+{% include  'ManagementSystem/class-table.html'%}
+<!--end class table-->
+<hr class="my-4" style="background-color: white">
+{% csrf_token %}
 
 {% endblock %}
+ 
+{% block modals %}
+<!-- add class modal -->
+<div id="add-class-modal" class="modal fade bd-example-modal-lg" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Class</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {% load staticfiles %}
+                    <img id="loader" src="{% static 'ManagementSystem/image/loader.gif' %}" width="35" height="35" style="display:none;visibility:hidden;">
+                </div>
+                <div class="modal-body">
+    
+                    {% include 'ManagementSystem/class-form.html' %}
+    
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    {% if "Change" in permissions %}
+                    <button id='add-class' href="{% url 'add_class'%}" type="submit" class="btn btn-primary btn-sm">Add</button>
+                    {% endif %}
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <!--end add class modal -->
+    
+    <!--view class modal-->
+    <div id="view-class-modal" class="modal fade" tabindex="-1" data-backdrop="static" style="padding:0% !important;" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"><!--style="width: 100%;max-width:100%;margin: 0;"-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="view-class-modal-lable">View Class</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {% load staticfiles %}
+                    <img id="loader" src="{% static 'ManagementSystem/image/loader.gif' %}" width="35" height="35" style="display:none;visibility:hidden;">
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <!--end view class modal-->
+    
+    <!-- delete modal -->
+    <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" >
+            <div class="modal-content">
+                <div class="modal-header text-white bg-danger">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Class</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color:white;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-justify">
+                    On delete all enrollments to this class will also be deleted, Do you really want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="save" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end delete modal -->
 
+
+
+
+
+
+
+<!-- script -->
+<script>
+    /***
+    var validationStyles = function () {
+        console.log($('#message').html() != '');
+        if ($('#message').html() != '') {
+            $(".field-group .field").removeClass("is-invalid is-valid");
+        }
+        else {
+            var fields = $(".field-group .field")
+            var count = 0;
+            while (count < fields.length) {
+                if ($(fields[count]).siblings(".errorlist")[0]) {
+                    $(fields[count]).addClass("is-invalid");
+                    $(fields[count]).css("background-size", '100%');
+
+                }
+                else {
+                    $(fields[count]).addClass("is-valid");
+                    $(fields[count]).css("background-size", '100%');
+                }
+                count++;
+            }
+        }
+    }
+    **/
+    /**
+    var bindWithForm = function () {
+        /**
+
+            Hides errors of clicked field. Field must have class 'field' and must be wrapped with a container having class 'field-group'
+
+        **//**
+        $(".field-group .field").change(function (event) {
+            $($(this).siblings(".errorlist")[0]).remove();
+            $(this).removeClass("is-invalid is-valid");
+        });
+    }
+    ****/
+    var bindWithEnrolBtn = function(){
+        $('#enrol-btn').click(function(event){
+            event.preventDefault();
+           enrolUrl = $(this).attr('data-enrolUrl');
+           fields = $('#enrolment-form .field');
+           var i = 0;
+           dict = {};
+           console.log("Enrolment!");
+           console.log(enrolUrl);
+           console.log(fields);
+           while( i < fields.length ){
+                dict[fields[i].name] = fields[i].value;   
+                i++;
+           }
+           dict['csrfmiddlewaretoken'] = $('input[name=csrfmiddlewaretoken]').val();
+     
+           $.post(enrolUrl,dict,function(data){
+               console.log(data);
+                $('#enroled-table').html(data);
+                bindWithEnrolBtn();
+            
+                
+           }); 
+        });
+    }
+    
+
+    
+
+    $('#save').click(function (event) {
+        var children = $('#class-table input:checked');
+        console.log(children);
+        var count = 0;
+        var name = " ";
+        var dict = {};
+        dict['searchBox'] = $('#id_searchBox')[0].value;
+        dict['numberOfEntries'] = $('#id_numberOfEntries')[0].value;
+        dict['page'] = $('#current-page').attr('data-page');
+        while (count < children.length) {
+            name = children[count].id;
+            dict[name] = children[count].checked;
+            count++;
+            name = ' ';
+        }
+        dict['page'] = $('#current-page').attr('data-page');
+        console.log($('#current-page').attr('data-page'));
+        console.log(dict);
+        dict['csrfmiddlewaretoken'] = $('input[name=csrfmiddlewaretoken]').val();
+  
+        $.post("{% url 'delete_class' %}", dict, function (data) {
+            $('#class-table').html(data);
+            bindWithClassLinks();
+        });
+     
+    });
+    $('#generic-form').click(function (event) {
+        $('#message').html('');
+    });
+
+
+    var classInformationUpdate = function () {
+        /*
+            Binds when class information is updated
+        */
+        $('#update-class').click(function (event) {
+            $('#loader').css('diplay', 'normal', 'visibility', 'visible');
+            event.preventDefault();
+            fields = $('#view-class-modal #generic-form .field');
+            var dict = {};
+            i = 0;
+            while (i < fields.length) {
+                dict[fields[i].name] = fields[i].value;
+                i++;
+            }
+            dict['csrfmiddlewaretoken'] = $('input[name=csrfmiddlewaretoken]').val();
+            console.log(dict);
+            $.post($(this).attr("href"), dict, function (data) {
+                $('#view-class-modal #generic-form').html(data);
+                $('#loader').css('visibility', 'hidden');
+            });
+    
+        });
+    
+    }
+    
+    classInformationUpdate();
+    
+    var bindWithClassLinks = function () {
+        /**
+    
+          Binds With Class Links....
+    
+        **/
+    
+        $('.class-link').click(function (event) {
+            //bool = true;
+            event.preventDefault();
+            var href = $(this).attr('data-href'); 
+            var classDetailUrl = $(this).attr("data-DetailUrl")   
+            var enrolUrl = $(this).attr("data-enrolUrl") 
+            $.get($(this).attr('data-href'), function (data) {
+                $('#view-class-modal .modal-body').html(data);
+                $('#update-class').attr('href', classDetailUrl);
+             
+                //other add here
+
+                bindWithEnrolBtn();
+                classInformationUpdate();
+            });
+        });
+    }
+    
+    bindWithClassLinks();
+    
+    
+    
+    var updateClassTable = function () {
+        /*
+          Updates class-table
+        */
+        dict = {}
+        dict['searchBox'] = $('#id_searchBox')[0].value;
+        dict['numberOfEntries'] = $('#id_numberOfEntries')[0].value;
+        dict['page'] = $('#current-page').attr('data-page');
+        dict['csrfmiddlewaretoken'] = $('input[name=csrfmiddlewaretoken]').val();
+        $.post("{% url 'update_classes' %}",dict,function (data) {
+         $("#class-table").html(data);
+            bindWithClassLinks();
+            $('#refresh').click(function(){
+                updateClassTable();
+            });
+        });
+    }
+
+    //filters
+    $('#refresh').click(function(){
+        updateClassTable();
+    });
+    
+    
+    
+
+    $('#add-class').click(function (event) {
+    
+        $('#loader').css('diplay', 'normal', 'visibility', 'visible');
+        event.preventDefault();
+    
+        fields = $('#add-class-modal #generic-form .field');
+        console.log(fields);
+        var dict = {};
+        i = 0;
+        while (i < fields.length) {
+            dict[fields[i].name] = fields[i].value;
+            i++;
+        }
+    
+        dict['csrfmiddlewaretoken'] = $('input[name=csrfmiddlewaretoken]').val();
+    
+        $.post($(this).attr("href"), dict, function (data) {
+            $('#add-class-modal #generic-form').html(data);
+            updateClassTable();
+            //bindWithForm();
+            //validationStyles();
+            $('#loader').css('visibility', 'hidden');
+        });
+    
+    });
+
+    
+    
+</script>
+
+
+{% endblock%}

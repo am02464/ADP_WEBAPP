@@ -1,0 +1,24 @@
+<div class="row">
+    <!--class details form-->
+    <div class="col-sm-12 ">
+        <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-address-card" style="color:rgb(0, 128, 49);">  Student Details</i> 
+                </div>
+                <div class="card-body">
+                    {% include 'ManagementSystem/student-form.html' %} 
+                  
+                        <button id='update-student-btn' data-href="/willBeAddedByStudentLinkFunction" type="submit" class="btn btn-primary btn-sm">Update</button>
+                  
+                </div>
+        </div>
+    </div>
+    <!--enrolled students table-->
+    
+    <div class="col-sm-12 ">
+        <div id="enrolements-table">
+            {% include 'ManagementSystem/view-students-enrolments.html' %} 
+        </div>
+    </div>
+    <!--end enrolled students table-->
+</div>

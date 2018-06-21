@@ -1,5 +1,6 @@
 from django import forms
-from . import models
+from . import models 
+from django.db.models import Q 
 from datetime import date
 
 # Helper Functions
@@ -14,7 +15,18 @@ def name_Cleaner(name):
 
 
 
-# Forms
+
+class ClassFilter(forms.Form):
+    searchBox = forms.CharField(max_length=30, label='Search',required=False, widget= forms.TextInput(attrs={'class':'form-control'}))
+    numberOfEntries = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}),label='Number of Entries', choices=[(5,5),(10,10),(50,50),(100,100)],required=False)
+
+    def getFilteredClass(self):
+     
+        print(self.cleaned_data)
+        
+    
+
+
 
 
 class Login(forms.Form):
@@ -38,10 +50,10 @@ class EditClass(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'name': forms.TextInput({'class' : 'form-control','placeholder':'Class Name'}),
-            'section': forms.Select({'class' : 'form-control','placeholder':'Section'}),
-            'begindate': forms.SelectDateWidget({'class': 'form-control'}),
-            'enddate': forms.SelectDateWidget({'class': 'form-control'}),
+            'name': forms.TextInput({'class' : 'form-control field form-control-sm','placeholder':'Class Name'}),
+            'section': forms.Select({'class' : 'form-control field form-control-sm','placeholder':'Section'}),
+            'begindate': forms.SelectDateWidget({'class': 'form-control field form-control-sm'}),
+            'enddate': forms.SelectDateWidget({'class': 'form-control field form-control-sm'}),
 
         }
 
@@ -55,14 +67,28 @@ class EditClass(forms.ModelForm):
                 return section_
 
         if models.Class.objects.filter(name= name_,section= section_).exists():
+
             raise forms.ValidationError("Class Name with this section already exists.")
         return section_
+
+
     def clean_enddate(self):
         b_date = self.cleaned_data.get('begindate')
         e_date = self.cleaned_data.get('enddate')
         if e_date <= b_date:
             raise forms.ValidationError("End Date Must be greater than Begin Date")
         return e_date
+
+class EnrolmentForm(forms.ModelForm):
+    class Meta:
+        model = models.Enrollment
+        fields ='__all__'
+        widgets = {
+            'student' : forms.NumberInput({'class' : 'form-control field form-control-sm','placeholder':'Student ID'}),
+            'clas' : forms.NumberInput({'class' : 'form-control field form-control-sm'})
+        }
+        # have to add enrollment clean logic 
+
 
 def batch():
     return [('all','all')]+list(models.Batch.objects.all().values_list('year','year').order_by('-year'))
@@ -71,7 +97,7 @@ def clas():
 
 
 class StFilter(forms.Form):
-    class_selector = forms.ChoiceField(widget=forms.Select({'class' : 'form-control'}),label='Class',choices=clas)
+    class_selector = forms.ChoiceField(widget=forms.Select({'class' : 'form-control '}),label='Class',choices=clas)
     batch_selector = forms.ChoiceField(widget=forms.Select({'class': 'form-control'}),label='Batch',choices=batch)
 
 
@@ -87,14 +113,14 @@ class EditStudent(forms.ModelForm):
         model= models.Students
         fields ='__all__'
         widgets = {
-            'firstname' : forms.TextInput({'class' : 'form-control','placeholder':"Student's First Name"}),
-            'lastname'   : forms.TextInput({'class' : 'form-control','placeholder':"Student's Last Name"}),
-            'fathername' : forms.TextInput({'class' : 'form-control','placeholder':"Father's Name"}),
-            'fatherscnic' : forms.NumberInput({'class' : 'form-control','placeholder':"Father's CNIC"}),
-            'studentscnic' : forms.NumberInput({'class' : 'form-control','placeholder':"Student's CNIC"}),
-            'fathersnumber' : forms.NumberInput({'class' : 'form-control','placeholder':"Fathers's Contact Number"}),
-            'studentsnumber' : forms.NumberInput({'class' : 'form-control','placeholder':"Student's Contact Number"}),
-            'batch' : forms.Select({'class' : 'form-control'}),
+            'firstname' : forms.TextInput({'class' : 'form-control field form-control-sm','placeholder':"Student's First Name"}),
+            'lastname'   : forms.TextInput({'class' : 'form-control field form-control-sm','placeholder':"Student's Last Name"}),
+            'fathername' : forms.TextInput({'class' : 'form-control field form-control-sm','placeholder':"Father's Name"}),
+            'fatherscnic' : forms.NumberInput({'class' : 'form-control field form-control-sm','placeholder':"Father's CNIC"}),
+            'studentscnic' : forms.NumberInput({'class' : 'form-control field form-control-sm','placeholder':"Student's CNIC"}),
+            'fathersnumber' : forms.NumberInput({'class' : 'form-control field form-control-sm','placeholder':"Fathers's Contact Number"}),
+            'studentsnumber' : forms.NumberInput({'class' : 'form-control field form-control-sm','placeholder':"Student's Contact Number"}),
+            'batch' : forms.Select({'class' : 'form-control field'}),
         }
 
 

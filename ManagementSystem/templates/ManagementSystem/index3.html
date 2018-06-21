@@ -1,0 +1,193 @@
+<html>
+
+<head>
+	<title>Atif Mehmood</title>
+	<meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1'> {% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'ManagementSystem/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'ManagementSystem/css/index.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="{%url 'user_profile'%}">
+                        <img src="{% static 'ManagementSystem/image/ima.jpg'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                        ADP Management System
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                 aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">{{current}}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated%}
+                            <a class="nav-link" href="{% url 'logout_view' %}">{{user.username}}</a>
+                            {% else%}
+                            <a class="nav-link" href="#">Login</a>
+                            {%endif%}
+                        </li>
+                    </ul>
+                </div>
+    </nav><!--Navbar-->
+    
+    <div class="parallax" style="background-image: url({% static 'ManagementSystem/image/Library.jpg' %})">
+
+    <section id="section-1" class="section">
+    <div id="chapter-div" class="container">
+            <h1 class="chapter-name"></h1>
+            <p class='lead'>{{UC_Details}}</p>
+    </div>
+          
+        
+        
+			<!-- info about chapter -->
+			<p class="lead uc-text"> 
+
+    </section><!--main-section-->
+
+
+    <section id="section-2">
+    <section>
+      <div class="container">
+        <h2 class="display-5 text-white" style="text-align: center;padding-top: 4rem;">Team Members</h2>
+        	<hr class="my-4" style="background-color: white">
+    </section>
+      <section>
+      <div class="container">
+          <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+          
+            <div class="p-4">
+            
+              <img class="img-fluid rounded-circle gallery" src="{%static 'ManagementSystem/image/ramsha.jpg'%}"  alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-4">
+              <h2 class="display-5">Ramsha Meing, <span class="text-muted">President.</span></h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    	<hr class="my-4" style="background-color: white">
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="p-4">
+              <img class="img-fluid rounded-circle" src="{%static 'ManagementSystem/image/atif.jpg'%}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="p-5">
+              <h2 class="display-5">Atif Mehmood, <span class="text-muted">Vice-President.</span></h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    	<hr class="my-4" style="background-color: white">
+    <section>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <div class="p-5">
+              <img class="img-fluid rounded-circle" src="{%static 'ManagementSystem/image/rafay.jpg'%}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="p-5">
+              <h2 class="display-5">Abdul Rafay, <span class="text-muted">Logistics Manager.</span></h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    </section>
+    </div>
+    
+    <footer class="py-5" style='background:black;'>
+      <div class="container bg-black">
+        <p class="m-0 text-center text-white small">This webapp is developed by Atif Mehmood</p>
+      </div>
+    </footer>
+
+
+
+</body>
+</html>
+
+
+<div class="card mb-12 ">
+    <div class="card card-plain">
+        <div class="card-header">
+            <i class="fa fa-table"></i> Student Table
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table-hover table-striped table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Father Name</th>
+                            <th scope="col">Batch</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Father Name</th>
+                            <th scope="col">Batch</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            {% for students in students%}
+                            <td scope="row">{{forloop.counter}}</td>
+                            {% for item in students%}
+                            {% if forloop.counter == 2%}
+                            {% if item != None%}
+                            <td><a href="#"> {{item}} </a></td>
+                            {% else %}
+                            <td> {{item}} </td>
+                            {% endif %}
+                            {% else %}
+
+                            <td><a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}"> {{item.id}} </a></td>
+                            <td><a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}"> {{item.getFullName}} </a></td>
+                            <td><a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}"> {{item.fathername}} </a></td>
+                            <td><a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}"> {{item.batch}} </a></td>
+                            <td><input type="checkbox" class="check" id="{{item.id}}" value="present" name="{{item.id}}"></td>
+                            {% endif %}
+                            {% endfor%}
+                        </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>   

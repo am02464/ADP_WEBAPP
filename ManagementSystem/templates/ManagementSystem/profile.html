@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>
+        {{user.username}}
+    </title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
+    <!--     Fonts and icons     -->
+     {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ManagementSystem/css/css.css' %}">
+    <link rel="stylesheet" href="{% static 'ManagementSystem/css/font-awesome.css' %}">
+    <!-- CSS Files -->
+    <link href="{% static 'ManagementSystem/css/material-kit.css' %}" rel="stylesheet">
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="{% static 'ManagementSystem/css/demo.css' %}" rel="stylesheet">
+</head>
+
+<body class="profile-page sidebar-collapse">
+    <nav class="navbar customnav navbar-expand-lg fixed-top navbar-dark bg-dark" style="position:page;width:100%;">
+        <a class="navbar-brand" href="{%url 'user_profile'%}">
+            <img src="{% static 'ManagementSystem/image/ima.jpg'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+            ADP Management System
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{%url 'index'%}">
+                        Home
+                        <span class="sr-only">{{current}}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    {% if user.is_authenticated%}{% load staticfiles %}
+                    <a class="nav-link" href="{% url 'logout_view' %}">{{user.username}}</a>
+                    {% else%}
+                    <a class="nav-link" href="#">Login</a>
+                    {%endif%}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url(&quot;../assets/img/city-profile.jpg&quot;);"></div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img src="{%static 'ManagementSystem/image/atif.jpg'%}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                            </div>
+                            <div class="name">
+                                <h3 class="title">Christian Louboutin</h3>
+                                <h6>Designer</h6>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="description text-center">
+                    <p>
+                        An artist of considerable range, Chet Faker - the name
+                        taken by Melbourne-raised, Brooklyn-based Nick Murphy - writes, performs
+                        and records all of his own music, giving it a warm, intimate feel with a
+                        solid groove structure.
+                    </p>
+                </div>
+
+
+                <div class="tab-content tab-space">
+                    <div class="tab-pane active text-center gallery" id="studio">
+                        <div class="row">
+                            <div class="col-md-3 ml-auto">
+                                <img src="profile_files/studio-1.jpg" class="rounded">
+                                <img src="profile_files/studio-2.jpg" class="rounded">
+                            </div>
+                            <div class="col-md-3 mr-auto">
+                                <img src="profile_files/studio-5.jpg" class="rounded">
+                                <img src="profile_files/studio-4.jpg" class="rounded">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane text-center gallery" id="works">
+                        <div class="row">
+                            <div class="col-md-3 ml-auto">
+                                <img src="profile_files/olu-eletu.jpg" class="rounded">
+                                <img src="profile_files/clem-onojeghuo.jpg" class="rounded">
+                                <img src="profile_files/cynthia-del-rio.jpg" class="rounded">
+                            </div>
+                            <div class="col-md-3 mr-auto">
+                                <img src="profile_files/mariya-georgieva.jpg" class="rounded">
+                                <img src="profile_files/clem-onojegaw.jpg" class="rounded">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane text-center gallery" id="favorite">
+                        <div class="row">
+                            <div class="col-md-3 ml-auto">
+                                <img src="profile_files/mariya-georgieva.jpg" class="rounded">
+                                <img src="profile_files/studio-3.jpg" class="rounded">
+                            </div>
+                            <div class="col-md-3 mr-auto">
+                                <img src="profile_files/clem-onojeghuo.jpg" class="rounded">
+                                <img src="profile_files/olu-eletu.jpg" class="rounded">
+                                <img src="profile_files/studio-1.jpg" class="rounded">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-default">
+        <div class="container">
+            <nav class="float-left">
+                <ul>
+                    <li>
+                        <a href="https://www.creative-tim.com/">
+                            Creative Tim
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://presentation.creative-tim.com/">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://blog.creative-tim.com/">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.creative-tim.com/license">
+                            Licenses
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright float-right">
+
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>2018, made with <i class="material-icons">favorite</i> by
+                <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a> for a better web.
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'ManagementSystem/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'ManagementSystem/js/jquery-slim.min.js' %}"></script>
+    <script src="{% static 'ManagementSystem/js/popper.min.js' %}"></script>
+    <script src="{% static 'ManagementSystem/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'ManagementSystem/js/jquery.js' %}"></script>
+    <script src="{% static 'ManagementSystem/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'ManagementSystem/js/jquery.js' %}" type="text/javascript"></script>
+    <script src="{% static 'ManagementSystem/js/popper.js' %}" type="text/javascript"></script>
+    <script src="{% static 'ManagementSystem/js/bootstrap-material-design.js' %}" type="text/javascript"></script>
+    <script src="{% static 'ManagementSystem/js/moment.js' %}"></script>
+
+
+    <script src="{% static 'ManagementSystem/js/nouislider.js' %}" type="text/javascript' %}"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script src="{% static 'ManagementSystem/js/material-kit.js' %}" type="text/javascript' %}"></script>
+    <script>
+        $(document).ready(function () {
+            //init DateTimePickers
+            materialKit.initFormExtendedDatetimepickers();
+
+            // Sliders Init
+            materialKit.initSliders();
+
+        });
+
+
+        function scrollToDownload() {
+            if ($('.section-download').length != 0) {
+                $("html, body").animate({
+                    scrollTop: $('.section-download').offset().top
+                }, 1000);
+            }
+        }
+        $(window).scroll(function (event) {
+            console.log(event.pageY);
+            var y = event.pageY * 0.8;
+            if (y > 600) {
+                y = 600;
+            }
+            $('.page-header').css("transform", 'translate3d(0px,' + y + 'px, 0px)');
+            console.log($('.page-header').css("transform"));
+        });
+    </script>
+
+
+</body>
+</html>

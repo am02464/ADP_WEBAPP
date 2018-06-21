@@ -1,0 +1,28 @@
+
+
+
+<div class="row">
+   
+    <!--class details form-->
+    <div class="col-sm-12 ">
+        <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-graduation-cap" style="color:rgb(0, 128, 49);">Class Details</i> 
+                </div>
+                <div class="card-body">
+                    {% include 'ManagementSystem/class-form.html' %} 
+                    {% if "Change" in permissions %}
+                        <button id='update-class' href="/willBeAddedByClassLinkFunction" type="submit" class="btn btn-primary btn-sm">Update</button>
+                    {% endif %}
+                </div>
+        </div>
+    </div>
+    <!--enrolled students table-->
+    
+    <div class="col-sm-12 ">
+        <div id="enroled-table">
+            {% include 'ManagementSystem/view-enroled-students.html' %} 
+        </div>
+    </div>
+    <!--end enrolled students table-->
+</div>

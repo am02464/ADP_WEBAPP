@@ -1,0 +1,89 @@
+<div id="enroled-table">
+    <div class="card">
+
+        <div class="card-header">
+            <i class="fa fa-table" style="color:rgb(0, 108, 231);"> Student's Enrolments</i>
+            <button  class="btn btn-sm btn-danger" data-enrolUrl="{% url 'enrol_from_class_view' %}" style="float:right;">Delete Selected</button>
+
+        </div>
+        <div class="card-body">
+            <form>
+                <div id="enrolment-form">
+                    {{enrolmentForm.clas.errors}} {{enrolmentForm.clas}}
+                    <div style="display:none;">{{enrolmentForm.student}}</div>
+                </div>
+
+                <button  id="enrol-btn" class="btn btn-sm btn-dark" data-enrolUrl="{% url 'enrol_from_student_view' %}" style="margin-top:5px;">Enrol</button>
+
+            </form>
+        </div>
+        <div>
+            <div class="table-responsive">
+                <table class="table-hover table-striped table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Class Name</th>
+                            <th scope="col">Section</th>
+                            <th scope="col">Begin Date</th>
+                            <th scope="col">End Date</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Class Name</th>
+                            <th scope="col">Section</th>
+                            <th scope="col">Begin Date</th>
+                            <th scope="col">End Date</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        {% for item in classes%}
+                        <tr>
+                            <td>
+                                {{forloop.counter}}
+                            </td>
+
+                            <td>
+                                <a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}">
+                                    {{item.id}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}">
+                                    {{item.name}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}">
+                                    {{item.section}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}">
+                                    {{item.begindate}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class='student-link' data-toggle="modal" data-target=".bd-example-modal-lg" href="{% url 'update_student' item.id %}">
+                                    {{item.enddate}}
+                                </a>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="check" id="{{item.id}}" value="present" name="{{item.id}}">
+                            </td>
+                        </tr>
+                        {% endfor%}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -4,7 +4,7 @@
 	<title>Atif Mehmood</title>
 	<meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1'> {% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'ManagementSystem/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'ManagementSystem/css/myStyle.css' %}">
+	<!--<link rel="stylesheet" href="{% static 'ManagementSystem/css/myStyle.css' %}">-->
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 					<a class="nav-link" href="#">About</a>
 				</li>
 				<li class="nav-item">
-					{% if user.is_authenticated%}
+					{% if user.is_authenticated%}{% load staticfiles %}
 					<a class="nav-link" href="{% url 'logout_view' %}">{{user.username}}</a>
 					{% else%}
 					<a class="nav-link" href="#">Login</a>
@@ -37,7 +37,8 @@
 			</ul>
 		</div>
 	</nav>
-	
+	 <div class="parallax" style="background-image: url({% static 'ManagementSystem/image/Library.jpg' %})">
+
 	<section class="centered" id="main-section" style='background-image: url("{% static 'ManagementSystem/image/im0.jpg'%}");'>
 		<div class="jumbotron jumbo">
 			<h1 class="display-3 chapter-name uc-text">{{UC_Name}}</h1>
@@ -49,6 +50,7 @@
 		  
 	</div>
 	</section>
+	</div>
 	{# inline scripting #}
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	 crossorigin="anonymous"></script>
@@ -56,6 +58,9 @@
 	 crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	 crossorigin="anonymous"></script>
+	 <script src="{% static 'ManagementSystem/js/jquery-3.3.1.min.js' %}"></script>
+	  <script src="{% static 'ManagementSystem/js/jquery-slim.min.js' %}"></script>
+	<script src="{% static 'ManagementSystem/js/popper.min.js' %}"></script>
 	<script src="{% static 'ManagementSystem/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'ManagementSystem/js/jquery.js' %}"></script>
 	<script src="{% static 'ManagementSystem/js/jquery-3.3.1.min.js' %}"></script>
