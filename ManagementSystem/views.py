@@ -7,18 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Permission, User
 from django.shortcuts import get_object_or_404
-# imports for RESTful API
-from rest_framework import generics
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .serializers import StudentSerializer
-
-# Start of RESTful API 
-class StudentsList(generics.ListCreateAPIView):
-    queryset = Students.objects.all()
-    serializer_class = StudentSerializer
-
-
 
 
 
