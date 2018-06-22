@@ -455,4 +455,4 @@ def test_view(request):
     return render_to_response('ManagementSystem/student-table.html',context={'students':list})
 
 
-print(Students.objects.filter(enrollment__clas_id = 1))
+
